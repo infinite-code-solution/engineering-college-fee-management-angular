@@ -1,0 +1,99 @@
+/* Container Canvas Area Configuration */
+.login-container {
+  background-color: #0b1d33;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Central Card Component Surface Layout */
+.login-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  max-width: 440px;
+  width: 100%;
+}
+
+/* CSS Native Representation of Pinwheel Geometry Badge Asset */
+.logo-placeholder {
+  width: 120px;
+  height: 120px;
+  background: conic-gradient(
+    #dc3545 0deg 45deg, 
+    #0d6efd 45deg 90deg, 
+    #58181c 90deg 135deg, 
+    #212529 135deg 180deg, 
+    #ffc107 180deg 225deg, 
+    #fd7e14 225deg 270deg, 
+    #6f42c1 270deg 315deg, 
+    #198754 315deg 360deg
+  );
+  clip-path: polygon(50% 0%, 65% 35%, 100% 35%, 70% 55%, 85% 90%, 50% 70%, 15% 90%, 30% 55%, 0% 35%, 35% 35%);
+}
+
+/* Typography Rules Hierarchy */
+.college-title {
+  color: #0b1d33;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+}
+
+/* Interactive Entry Form Elements */
+.input-group-text {
+  background-color: transparent;
+  border-right: none;
+  color: #6c757d;
+}
+
+.form-control {
+  border-left: none;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #dee2e6;
+}
+
+/* Focused UI Boundary Highlighting Rules */
+.input-group:focus-within .input-group-text,
+.input-group:focus-within .form-control {
+  border-color: #0b1d33;
+}
+
+/* Platform Submission Button Styling Rules */
+.btn-login {
+  background-color: #0b1d33;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.75rem;
+  border: none;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-login:hover:not([disabled]) {
+  background-color: #163255;
+}
+
+.btn-login:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Layout Shift Prevention Bounds */
+.min-error-height {
+  min-height: 21px;
+}
+
+/* Navigation Links Style Mechanics */
+.login-footer-links a {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.login-footer-links a:hover {
+  color: #0b1d33;
+  text-decoration: underline !important;
+}

@@ -1,0 +1,73 @@
+<div class="login-container d-flex align-items-center justify-content-center min-vh-100">
+  <div class="container d-flex justify-content-center align-items-center">
+    <div class="login-card text-center p-4 p-md-5">
+      
+      <!-- Brand Logo Pinwheel Asset Placeholder -->
+      <div class="logo-placeholder mx-auto mb-3"></div>
+
+      <h1 class="college-title text-uppercase mb-4">
+        Tadipatri Engineering College <br> and Technology
+      </h1>
+
+      <!-- Angular Reactive Form Implementation -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        
+        <!-- Email/ID Input Field Group -->
+        <div class="input-group mb-1" [class.is-invalid]="isFieldInvalid('username')">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          <input 
+            type="text" 
+            formControlName="username"
+            class="form-control" 
+            [class.is-invalid]="isFieldInvalid('username')"
+            placeholder="Enter College Email or ID" 
+            autocomplete="username"
+            required>
+        </div>
+        <div class="text-start text-danger small mb-3 min-error-height">
+          @if (isFieldInvalid('username')) {
+            <span>Identification or email is required.</span>
+          }
+        </div>
+
+        <!-- Password Input Field Group -->
+        <div class="input-group mb-1" [class.is-invalid]="isFieldInvalid('password')">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input 
+            type="password" 
+            formControlName="password"
+            class="form-control" 
+            [class.is-invalid]="isFieldInvalid('password')"
+            placeholder="Enter Password" 
+            autocomplete="current-password"
+            required>
+        </div>
+        <div class="text-start text-danger small mb-4 min-error-height">
+          @if (isFieldInvalid('password')) {
+            <span>Password is required.</span>
+          }
+        </div>
+
+        <!-- Action Processing Trigger Button -->
+        <button 
+          type="submit" 
+          [disabled]="loginForm.invalid || isLoading()"
+          class="btn btn-login w-100 rounded-3 mb-4 d-flex align-items-center justify-content-center gap-2">
+          @if (isLoading()) {
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            <span role="status">Authenticating...</span>
+          } @else {
+            <span>Log In</span>
+          }
+        </button>
+      </form>
+
+      <!-- Bottom Platform Navigation Anchors -->
+      <div class="d-flex justify-content-between login-footer-links">
+        <a routerLink="/forgot-password" class="text-decoration-none">Forgot Password?</a>
+        <a routerLink="/request-access" class="text-decoration-none">Request Access</a>
+      </div>
+
+    </div>
+  </div>
+</div>

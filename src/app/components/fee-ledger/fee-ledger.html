@@ -1,0 +1,61 @@
+<!-- Analytic Insight Cards -->
+<div class="metrics-row" *ngIf="!loading">
+  <div class="metric-card card-collected">
+    <h4>Total Collected</h4>
+    <p class="amount">${{ summaryData.total_collected | number:'1.2-2' }}</p>
+  </div>
+  <div class="metric-card card-pending">
+    <h4>Outstanding Balance</h4>
+    <p class="amount">${{ summaryData.total_pending | number:'1.2-2' }}</p>
+  </div>
+  <div class="metric-card card-rate">
+    <h4>Collection Efficiency</h4>
+    <p class="percentage">{{ summaryData.collection_rate_percentage }}%</p>
+  </div>
+</div>
+
+<!-- Ledger Data Grid Table -->
+<div class="table-container">
+  <div class="table-header">
+    <h3>Student Accounts Ledger</h3>
+    <button class="btn-primary">+ Collect New Fee</button>
+  </div>
+
+  <table class="admin-table" *ngIf="!loading; else skeletonLoader">
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Roll No</th>
+        <th>Category</th>
+        <th>Total Due</th>
+        <th>Paid</th>
+        <th>Balance</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of feeRecords">
+        <td><strong>{{ record.student_name }}</strong></td>
+        <td>{{ record.roll_number }}</td>
+        <td><span class="type-tag">{{ record.fee_type }}</span></td>
+        <td>{{ record.total_amount | currency }}</td>
+        <td>{{ record.amount_paid | currency }}</td>
+        <td class="text-danger">{{ record.balance_amount | currency }}</td>
+        <td>
+          <span class="badge" [ngClass]="getStatusClass(record.status)">
+            {{ record.status }}
+          </span>
+        </td>
+        <td>
+          <button class="btn-action view">View History</button>
+          <button class="btn-action pay" *ngIf="record.status !== 'Paid'">Record Pay</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #skeletonLoader>
+    <div class="spinner">Querying administrative ledgers...</div>
+  </ng-template>
+</div>

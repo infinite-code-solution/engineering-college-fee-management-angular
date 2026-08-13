@@ -1,0 +1,51 @@
+/* Layout Typography and Design Tokens Setup */
+.fs-7 {
+  font-size: 0.825rem !important;
+}
+
+.tracking-wider {
+  letter-spacing: 0.06rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Table Matrix Design Corrections */
+.table thead th {
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody tr {
+  transition: background-color 0.15s ease-in-out;
+}
+
+/* Custom layout behaviors for actions menu button states */
+.dropdown-menu-item {
+  display: block;
+  width: 100%;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  text-decoration: none;
+}
+
+.dropdown-menu-item:hover {
+  background-color: #f8f9fa;
+  color: #1e2125;
+}
+
+/* Metric surface transformations on dashboard view hover frames */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
