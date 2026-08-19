@@ -1,0 +1,66 @@
+<div class="signin-container">
+  <div class="left-panel">
+    <div class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 2L2 16L16 30L30 16L16 2Z" stroke="#E67E22" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M16 10L10 16L16 22L22 16L16 10Z" fill="#E67E22"/>
+      </svg>
+    </div>
+    
+    <div class="form-container">
+      <h1>Sign in</h1>
+      <p class="subtitle">Don't have an account? <a routerLink="/sign-up">Sign up</a></p>
+      
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Email address<span class="required">*</span></label>
+          <input type="email" placeholder="hughes.brian@company.com" name="email" [(ngModel)]="email" required />
+        </div>
+        
+        <div class="form-group">
+          <label>Password<span class="required">*</span></label>
+          <div class="input-wrapper">
+            <input [type]="showPassword() ? 'text' : 'password'" placeholder="Enter password" name="password" [(ngModel)]="password" required />
+            <span class="icon-eye" (click)="togglePasswordVisibility()">&#128065;</span>
+          </div>
+        </div>
+        
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" />
+            <span>Remember me</span>
+          </label>
+          <a routerLink="/forgot-password" class="forgot-password">Forgot password?</a>
+        </div>
+        
+        <button type="submit" class="btn-primary">Sign in</button>
+      </form>
+    </div>
+  </div>
+  
+  <div class="right-panel">
+    <div class="background-decorations">
+      <div class="circle circle-1"></div>
+      <div class="circle circle-2"></div>
+      <div class="circle circle-3"></div>
+      <div class="dots-pattern"></div>
+    </div>
+    
+    <div class="content-wrapper">
+      <h2>Welcome to our community</h2>
+      <p class="description">
+        Fuse helps developers to build organized and well coded dashboards full of beautiful and rich modules. Join us and start building your application today.
+      </p>
+      
+      <div class="community-stats">
+        <div class="avatars">
+          <img src="https://i.pravatar.cc/100?img=1" alt="Avatar" class="avatar" />
+          <img src="https://i.pravatar.cc/100?img=5" alt="Avatar" class="avatar" />
+          <img src="https://i.pravatar.cc/100?img=8" alt="Avatar" class="avatar" />
+          <img src="https://i.pravatar.cc/100?img=11" alt="Avatar" class="avatar" />
+        </div>
+        <p>More than 17k people joined us, it's your turn</p>
+      </div>
+    </div>
+  </div>
+</div>
