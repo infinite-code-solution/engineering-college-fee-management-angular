@@ -1,0 +1,35 @@
+<div class="content-header">
+  <h1 class="page-title">Settings</h1>
+  <div class="breadcrumbs">
+    <a routerLink="/dashboard">Home</a> / <span>Settings</span>
+  </div>
+</div>
+
+<div class="tabs-container">
+  <div class="tabs-wrapper">
+    <button class="scroll-btn left" (click)="scrollTabs(-200)">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    
+    <div class="tabs-scroll-area" #tabsScroll>
+      <div 
+        class="tab-item" 
+        *ngFor="let tab of tabs" 
+        [class.active]="activeTab() === tab"
+        (click)="setActiveTab(tab)"
+      >
+        <!-- Optional icon could go here -->
+        <span class="tab-label">{{ tab }}</span>
+      </div>
+    </div>
+    
+    <button class="scroll-btn right" (click)="scrollTabs(200)">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+  </div>
+</div>
+
+<div class="tab-content-area">
+  <h2>{{ activeTab() }} Settings</h2>
+  <p>Configure your {{ activeTab() | lowercase }} preferences here.</p>
+</div>
