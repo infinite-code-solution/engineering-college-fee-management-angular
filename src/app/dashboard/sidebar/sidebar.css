@@ -47,6 +47,7 @@
   color: #ffffff;
   font-family: inherit;
   font-size: 0.9rem;
+  box-sizing: border-box;
 }
 
 .sidebar-search input::placeholder {

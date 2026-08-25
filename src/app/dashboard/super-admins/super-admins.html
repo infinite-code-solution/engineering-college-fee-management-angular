@@ -1,0 +1,155 @@
+<div class="content-header">
+  <h1 class="page-title">Super Admins</h1>
+  <div class="breadcrumbs">
+    <a routerLink="/dashboard">Home</a> / <span>User Management</span> / <span>Super Admins</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Super Administrators</h3>
+    <div class="card-tools">
+      <div class="search-box">
+        <input 
+          type="text" 
+          placeholder="Search super admins..." 
+          [value]="searchTerm()"
+          (input)="updateSearch($event)"
+          class="form-control"
+        >
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>2FA Status</th>
+            <th class="text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (sa of paginatedData(); track sa.id) {
+            <tr>
+              <td><span class="text-warning">★</span> {{ sa.id }}</td>
+              <td><strong>{{ sa.name }}</strong></td>
+              <td>{{ sa.email }}</td>
+              <td>
+                <span class="badge" [class.badge-success]="sa.twoFactor === 'Enabled'" [class.badge-danger]="sa.twoFactor === 'Disabled'">
+                  {{ sa.twoFactor }}
+                </span>
+              </td>
+              <td class="text-right actions">
+                <button class="btn btn-sm btn-icon" title="View" (click)="openViewModal(sa)">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+                <button class="btn btn-sm btn-icon text-primary" title="Edit" (click)="openEditModal(sa)">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                </button>
+                <button class="btn btn-sm btn-icon text-danger" title="Delete" [disabled]="sa.id === 'SA-001'" (click)="openDeleteModal(sa.id)">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="text-center py-4 text-muted">No super admins found matching "{{searchTerm()}}"</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="card-footer">
+    <div class="pagination-info">
+      Showing {{ (currentPage() - 1) * pageSize() + 1 }} to {{ min(currentPage() * pageSize(), filteredData().length) }} of {{ filteredData().length }} entries
+    </div>
+    <div class="pagination-controls">
+      <button class="btn btn-sm" [disabled]="currentPage() === 1" (click)="setPage(currentPage() - 1)">Previous</button>
+      
+      @for (page of [].constructor(totalPages()); track $index) {
+        <button 
+          class="btn btn-sm page-num" 
+          [class.active]="currentPage() === ($index + 1)"
+          (click)="setPage($index + 1)"
+        >
+          {{ $index + 1 }}
+        </button>
+      }
+      
+      <button class="btn btn-sm" [disabled]="currentPage() === totalPages() || totalPages() === 0" (click)="setPage(currentPage() + 1)">Next</button>
+    </div>
+  </div>
+</div>
+
+<!-- Reusable Delete Confirmation Modal -->
+<app-confirm-modal
+  [isOpen]="showDeleteModal()"
+  title="Delete Super Admin"
+  message="Are you sure you want to delete this super admin? This action cannot be undone."
+  confirmText="Delete"
+  cancelText="Cancel"
+  (confirm)="confirmDelete()"
+  (cancel)="cancelDelete()"
+></app-confirm-modal>
+
+<!-- View Modal Overlay -->
+<div class="modal-backdrop" *ngIf="showViewModal()" (click)="closeViewModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">Super Admin Details</h3>
+      <button class="close-btn" (click)="closeViewModal()">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="modal-body" *ngIf="viewingRecord()">
+      <div class="detail-row"><strong>ID</strong> <span>: {{ viewingRecord()!.id }}</span></div>
+      <div class="detail-row"><strong>Name</strong> <span>: {{ viewingRecord()!.name }}</span></div>
+      <div class="detail-row"><strong>Email</strong> <span>: {{ viewingRecord()!.email }}</span></div>
+      <div class="detail-row"><strong>2FA Status</strong> <span>: {{ viewingRecord()!.twoFactor }}</span></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="closeViewModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Form Modal Overlay -->
+<div class="modal-backdrop" *ngIf="showEditModal()" (click)="cancelEdit()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">Edit Super Admin</h3>
+      <button class="close-btn" (click)="cancelEdit()">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="modal-body" *ngIf="editingRecord()">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" [(ngModel)]="editingRecord()!.name">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-control" [(ngModel)]="editingRecord()!.email">
+      </div>
+      <div class="form-group">
+        <label>2FA Status</label>
+        <select class="form-control" [(ngModel)]="editingRecord()!.twoFactor">
+          <option value="Enabled">Enabled</option>
+          <option value="Disabled">Disabled</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+      <button class="btn btn-primary" (click)="saveEdit()">Save Changes</button>
+    </div>
+  </div>
+</div>

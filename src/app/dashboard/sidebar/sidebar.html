@@ -20,12 +20,101 @@
           <span>Dashboard</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a routerLink="/dashboard/students" routerLinkActive="active" class="nav-link">
+      
+      <!-- User Management Multi-level Menu -->
+      <li class="nav-item has-treeview" [class.expanded]="userManagementExpanded()">
+        <a href="javascript:void(0)" class="nav-link" (click)="toggleUserManagement()">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-          <span>Students</span>
+          <span>User Management</span>
+          <svg class="chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </a>
+        <ul class="submenu">
+          <li class="nav-item">
+            <a routerLink="/dashboard/roles" routerLinkActive="active" class="nav-link">
+              <span class="dot-icon"></span>
+              <span>Roles</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dashboard/students" routerLinkActive="active" class="nav-link">
+              <span class="dot-icon"></span>
+              <span>Students</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dashboard/staff" routerLinkActive="active" class="nav-link">
+              <span class="dot-icon"></span>
+              <span>Staff</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dashboard/admins" routerLinkActive="active" class="nav-link">
+              <span class="dot-icon"></span>
+              <span>Admins</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dashboard/accounts" routerLinkActive="active" class="nav-link">
+              <span class="dot-icon"></span>
+              <span>Accounts</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dashboard/super-admins" routerLinkActive="active" class="nav-link">
+              <span class="dot-icon"></span>
+              <span>Super Admins</span>
+            </a>
+          </li>
+        </ul>
       </li>
+
+      <!-- Organizations Management Menu -->
+      <li class="nav-item has-treeview" [class.expanded]="organizationsExpanded()">
+        <a href="javascript:void(0)" class="nav-link" (click)="toggleOrganizations()">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span>Organizations Mgmt</span>
+          <svg class="chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+        <ul class="submenu">
+          <li class="nav-item">
+            <a routerLink="/dashboard/colleges" routerLinkActive="active" class="nav-link">
+              <span class="dot-icon"></span>
+              <span>Colleges</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dashboard/training-institutes" routerLinkActive="active" class="nav-link">
+              <span class="dot-icon"></span>
+              <span>Training Institutes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dashboard/shops" routerLinkActive="active" class="nav-link">
+              <span class="dot-icon"></span>
+              <span>Shops</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dashboard/companies" routerLinkActive="active" class="nav-link">
+              <span class="dot-icon"></span>
+              <span>Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dashboard/hotels" routerLinkActive="active" class="nav-link">
+              <span class="dot-icon"></span>
+              <span>Hotels</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dashboard/restaurants" routerLinkActive="active" class="nav-link">
+              <span class="dot-icon"></span>
+              <span>Restaurants</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
       <li class="nav-item">
         <a routerLink="/dashboard/fee-collection" routerLinkActive="active" class="nav-link">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>

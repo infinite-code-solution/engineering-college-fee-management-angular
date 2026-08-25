@@ -12,6 +12,8 @@ import { CommonModule } from '@angular/common';
 export class Sidebar {
   menu1Expanded = signal(false);
   menu2Expanded = signal(false);
+  userManagementExpanded = signal(false);
+  organizationsExpanded = signal(false);
   
   toggleMenu1() {
     this.menu1Expanded.update(v => !v);
@@ -19,5 +21,13 @@ export class Sidebar {
   
   toggleMenu2() {
     this.menu2Expanded.update(v => !v);
+  }
+
+  toggleUserManagement() {
+    this.userManagementExpanded.update(v => !v);
+  }
+
+  toggleOrganizations() {
+    this.organizationsExpanded.update(v => !v);
   }
 }
