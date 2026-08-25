@@ -1,10 +1,5 @@
 /* Tabs Styles (matching settings.css) */
-.tabs-container {
-  background-color: #2a3035;
-  padding: 15px;
-  border-radius: 6px;
-  margin-bottom: 20px;
-}
+
 
 .tabs-wrapper {
   display: flex;

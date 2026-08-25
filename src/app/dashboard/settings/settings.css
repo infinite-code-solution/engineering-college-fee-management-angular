@@ -1,9 +1,4 @@
-.tabs-container {
-  background-color: #2a3035; /* Dark background similar to image's green wrapper */
-  padding: 15px;
-  border-radius: 6px;
-  margin-bottom: 20px;
-}
+
 
 .tabs-wrapper {
   display: flex;
@@ -28,10 +23,7 @@
   transition: color 0.2s, background-color 0.2s;
 }
 
-.scroll-btn:hover {
-  color: #343a40;
-  background-color: #dee2e6;
-}
+
 
 .tabs-scroll-area {
   display: flex;

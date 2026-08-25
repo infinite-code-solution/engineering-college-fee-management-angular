@@ -23,7 +23,7 @@ export class SignInComponent {
   onSubmit() {
     if (this.email && this.password) {
       alert(`Successfully signed in with ${this.email}`);
-      // this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard']);
     } else {
       alert('Please enter both email and password');
     }
