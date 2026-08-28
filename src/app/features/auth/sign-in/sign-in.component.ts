@@ -2,6 +2,7 @@ import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class SignInComponent {
   private router = inject(Router);
+  private authService = inject(AuthService);
   showPassword = signal(false);
   email = '';
   password = '';
@@ -22,10 +24,11 @@ export class SignInComponent {
 
   onSubmit() {
     if (this.email && this.password) {
-      alert(`Successfully signed in with ${this.email}`);
-      this.router.navigate(['/dashboard']);
-    } else {
-      alert('Please enter both email and password');
+      this.authService.login({ email: this.email, password: this.password }).subscribe({
+        next: (response) => {
+          this.router.navigate(['/dashboard']);
+        }
+      });
     }
   }
 }

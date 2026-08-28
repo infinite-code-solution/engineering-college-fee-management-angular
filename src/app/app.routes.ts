@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { SignInComponent } from './features/auth/sign-in/sign-in.component';
+import { SignUpComponent } from './features/auth/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './features/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './features/auth/reset-password/reset-password.component';
 import { Dashboard } from './dashboard/dashboard';
 import { Home } from './dashboard/home/home';
 import { Students } from './dashboard/students/students';
@@ -20,6 +20,7 @@ import { ShopsComponent } from './dashboard/shops/shops';
 import { CompaniesComponent } from './dashboard/companies/companies';
 import { HotelsComponent } from './dashboard/hotels/hotels';
 import { RestaurantsComponent } from './dashboard/restaurants/restaurants';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
@@ -29,6 +30,7 @@ export const routes: Routes = [
   { 
     path: 'dashboard', 
     component: Dashboard,
+    canActivate: [authGuard], // Add any route guards if needed
     children: [
       { path: '', component: Home },
       { path: 'students', component: Students },
@@ -45,8 +47,9 @@ export const routes: Routes = [
       { path: 'shops', component: ShopsComponent },
       { path: 'companies', component: CompaniesComponent },
       { path: 'hotels', component: HotelsComponent },
-      { path: 'restaurants', component: RestaurantsComponent }
+      { path: 'restaurants', component: RestaurantsComponent },
+      { path: '**', redirectTo: '/sign-in', pathMatch: 'full' }
     ]
   },
-  { path: '', redirectTo: '/sign-in', pathMatch: 'full' }
+  { path: '**', redirectTo: '/sign-in', pathMatch: 'full' }
 ];
